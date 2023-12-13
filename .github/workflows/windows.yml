@@ -21,3 +21,9 @@ jobs:
           cd build
           cmake -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release ..
           msbuild ./CEFHelperProcess.sln
+          tar -c -f build.zip ./src/Release/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build.zip
