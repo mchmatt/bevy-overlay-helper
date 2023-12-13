@@ -15,13 +15,15 @@ jobs:
       - name: Setup MSVC dev
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Run CMake
+      - name: Generate solution w/ CMake
         run: |
           mkdir build
           cd build
           cmake -G "Visual Studio 17 2022" ..
-          msbuild ./CEFHelperProcess.sln
-          tar -c -f build.zip ./src/Debug/
+      - name: Compile w/ MSBuild
+        run: msbuild ./CEFHelperProcess.sln
+      - name: ZIP output files
+        run: Compress-Archive -Path .\src\Debug\* -Destination build.zip
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
