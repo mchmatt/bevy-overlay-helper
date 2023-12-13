@@ -1,0 +1,21 @@
+name: Windows
+
+on:
+  push:
+    branches: [test-ga]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup MSVC dev
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Run CMake
+        run: |
+          cmake -E make_directory build
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          msbuild ./build/CEFHelperProcess.sln
