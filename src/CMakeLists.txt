@@ -1,11 +1,10 @@
 # All helper source files
 set (HELPER_SRCS
-    main_win.cc
 )
 
 # Source files specific to Windows
 set (HELPER_SRCS_WINDOWS
-    #main_win.cc
+    main_win.cc
 )
 
 # Source files specific to MacOS
