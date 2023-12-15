@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -G "Xcode" ..
+          cmake -G "Xcode" -DPROJECT_ARCH=x86_64 ..
           cmake --build . -v
 
       - name: Upload artifact
