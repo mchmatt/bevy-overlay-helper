@@ -2,7 +2,7 @@ name: Windows
 
 on:
   push:
-    branches: [test-ga]
+    branches: [master]
 
 jobs:
   build:
