@@ -1,5 +1,11 @@
 # All helper source files
 set (HELPER_SRCS
+    app.cc
+    app.h
+    send_ipc_message_handler.cc
+    send_ipc_message_handler.h
+    render_process_handler.cc
+    render_process_handler.h
 )
 
 # Source files specific to Windows

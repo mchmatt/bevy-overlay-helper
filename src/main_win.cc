@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <include/cef_app.h>
 
+#include "app.h"
+#include "render_process_handler.h"
+
 int APIENTRY wWinMain(
     HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
@@ -10,6 +13,9 @@ int APIENTRY wWinMain(
 ) {
     printf("Starting helper process\n");
 
-    CefMainArgs main_args(hInstance);
-    return CefExecuteProcess(main_args, nullptr, nullptr);
+    CefRefPtr<OverlayRenderProcessHandler> renderProcessHandler = new OverlayRenderProcessHandler();
+    CefRefPtr<OverlayApp> app = new OverlayApp(renderProcessHandler);
+
+    CefMainArgs mainArgs(hInstance);
+    return CefExecuteProcess(mainArgs, app, nullptr);
 }
