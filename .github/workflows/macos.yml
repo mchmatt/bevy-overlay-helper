@@ -1,0 +1,32 @@
+name: MacOS
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@v2
+
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: "3.24.0"
+
+      - name: Compile process
+        run: |
+          mkdir build
+          cd build
+          cmake -G "Xcode" ..
+          cmake --build . -v
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: |
+            ./build/src/Debug/client-bevy
+            ./libcef/Debug/Chromium Embedded Framework.framework

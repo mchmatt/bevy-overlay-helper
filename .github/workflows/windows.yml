@@ -1,0 +1,31 @@
+name: Windows
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@v2
+        
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup MSVC dev
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Compile process
+        run: |
+          mkdir build
+          cd build
+          cmake -G "Visual Studio 17 2022" ..
+          msbuild ./CEFHelperProcess.sln
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build/src/Debug/

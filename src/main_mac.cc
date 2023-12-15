@@ -1,3 +1,5 @@
+#ifdef __APPLE__
+
 #include <stdio.h>
 #include <include/cef_app.h>
 #include <include/wrapper/cef_library_loader.h>
@@ -29,3 +31,4 @@ int main(int argc, char* argv[]) {
     CefMainArgs main_args(argc, argv);
     return CefExecuteProcess(main_args, nullptr, nullptr);
 }
+#endif
