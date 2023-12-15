@@ -10,7 +10,7 @@ class OverlayApp : public CefApp {
   public:
     OverlayApp(CefRefPtr<CefRenderProcessHandler> pRenderProcessHandler);
 
-    CefRefPtr<CefRenderProcessHandler> OverlayApp::GetRenderProcessHandler() override {
+    CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override {
       return _render_process_handler;
     }
 

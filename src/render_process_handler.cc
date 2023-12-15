@@ -10,12 +10,12 @@ void OverlayRenderProcessHandler::OnContextCreated(
 ) {
   CefRefPtr<CefV8Value> global = context->GetGlobal();
   if (!global)
-    throw new std::runtime_error("Could not get global in OverlayRenderProcessHandler");
+    return;
 
   CefRefPtr<CefV8Handler> sendIPCMessageHandler = new SendIPCMessageHandler();
   CefRefPtr<CefV8Value> sendIPCMessageFunction = CefV8Value::CreateFunction("_sendIPCMessage", sendIPCMessageHandler);
   if (!sendIPCMessageFunction)
-    throw new std::runtime_error("Could not create function in OverlayRenderProcessHandler");
+    return;
 
   global->SetValue("_sendIPCMessage", sendIPCMessageFunction, V8_PROPERTY_ATTRIBUTE_READONLY);
 }

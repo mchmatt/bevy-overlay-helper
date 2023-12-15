@@ -14,19 +14,19 @@ bool SendIPCMessageHandler::Execute(
 
   CefRefPtr<CefV8Context> context = CefV8Context::GetCurrentContext();
   if (!context)
-    throw std::runtime_error("Could not get current V8 context");
+    return true;
 
   CefRefPtr<CefFrame> frame = context->GetFrame();
   if (!frame)
-    throw std::runtime_error("Could not get frame");
+    return true;
 
   CefRefPtr<CefProcessMessage> processMessage = CefProcessMessage::Create("CEFOverlayMessage");
   if (!processMessage)
-    throw std::runtime_error("Could not create process message"); 
+    return true;
 
   CefRefPtr<CefListValue> argumentsList = processMessage->GetArgumentList();
 if (!argumentsList)
-    throw std::runtime_error("Could not get arguments list for process message"); 
+    return true;
 
   CefRefPtr<CefV8Value> firstArgument = arguments.at(0); // first argument should be message type
   if (!firstArgument || !firstArgument->IsString())

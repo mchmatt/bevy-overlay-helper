@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include <windows.h>
 #include <stdio.h>
 #include <include/cef_app.h>
@@ -19,3 +20,4 @@ int APIENTRY wWinMain(
     CefMainArgs mainArgs(hInstance);
     return CefExecuteProcess(mainArgs, app, nullptr);
 }
+#endif
