@@ -2,7 +2,7 @@ name: MacOS
 
 on:
   push:
-    branches: [test-ga]
+    branches: [master]
 
 jobs:
   build:
