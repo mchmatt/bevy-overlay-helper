@@ -27,4 +27,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: ./build/src/Debug/client-bevy
+          path: |
+            ./build/src/Debug/client-bevy
+            ./libcef/Debug/Chromium Embedded Framework.framework
