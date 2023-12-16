@@ -9,6 +9,8 @@
 #if defined(CEF_USE_SANDBOX)
 #include <include/cef_sandbox_mac.h>
 #endif
+#include "render_process_handler.h"
+#include "app.h"
 
 int main(int argc, char* argv[]) {
     printf("Starting helper process\n");
@@ -28,7 +30,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    CefRefPtr<OverlayRenderProcessHandler> renderProcessHandler = new OverlayRenderProcessHandler();
+    CefRefPtr<OverlayApp> app = new OverlayApp(renderProcessHandler);
+
     CefMainArgs main_args(argc, argv);
-    return CefExecuteProcess(main_args, nullptr, nullptr);
+    return CefExecuteProcess(main_args, app, nullptr);
 }
 #endif
