@@ -3,6 +3,7 @@ name: MacOS
 on:
   push:
     branches: [master]
+    paths: ['.github/workflows/macos-x86_64.yml']
 
 jobs:
   build:
