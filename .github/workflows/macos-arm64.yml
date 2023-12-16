@@ -23,10 +23,13 @@ jobs:
           cmake -G "Xcode" -DPROJECT_ARCH=arm64 ..
           cmake --build . -v
 
+      - id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build
+          name: v1.0.2-${{ steps.vars.outputs.sha_short }}-macosarm64
           path: |
             ./build/src/Debug/client-bevy
             ./libcef/Debug/Chromium Embedded Framework.framework
