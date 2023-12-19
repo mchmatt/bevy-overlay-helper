@@ -21,6 +21,7 @@ void OverlayRenderProcessHandler::OnContextCreated(
     return;
 
   global->SetValue("_sendIPCMessage", sendIPCMessageFunction, V8_PROPERTY_ATTRIBUTE_READONLY);
+  global->SetValue("_isOverlay", CefV8Value::CreateBool(true), V8_PROPERTY_ATTRIBUTE_READONLY);
 }
 
 bool OverlayRenderProcessHandler::OnProcessMessageReceived(
