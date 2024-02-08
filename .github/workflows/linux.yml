@@ -38,4 +38,4 @@ jobs:
         with:
           name: v1.0.3-${{ steps.vars.outputs.sha_short }}-linuxx86_64
           path: |
-            ./build/src/Release/client-bevy
+            ./build/src/Release/
