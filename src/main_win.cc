@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <include/cef_app.h>
+#include <include/cef_sandbox_win.h>
 
 #include "app.h"
 #include "render_process_handler.h"
