@@ -83,7 +83,7 @@ if(OS_LINUX)
     set(HELPER_TARGET "client-bevy_helper")
     set(HELPER_OUTPUT_NAME "client-bevy Helper")
 
-    add_executable(${HELPER_TARGET} WIN32 ${HELPER_SRCS})
+    add_executable(${HELPER_TARGET} ${HELPER_SRCS})
     SET_EXECUTABLE_TARGET_PROPERTIES(${HELPER_TARGET})
     target_link_libraries(${HELPER_TARGET} libcef_lib libcef_dll_wrapper ${CEF_STANDARD_LIBS})
 
