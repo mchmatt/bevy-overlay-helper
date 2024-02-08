@@ -31,5 +31,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: v1.0.4-${{ steps.vars.outputs.sha_short }}-windowsx64
+          name: v1.0.5-${{ steps.vars.outputs.sha_short }}-windowsx64
           path: ./build/src/Debug/
