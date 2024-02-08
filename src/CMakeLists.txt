@@ -14,6 +14,11 @@ set (HELPER_SRCS_WINDOWS
 )
 
 # Source files specific to MacOS
+set (HELPER_SRCS_LINUX
+    main_linux.cc
+)
+
+# Source files specific to Linux
 set (HELPER_SRCS_MAC
     main_mac.cc
 )
@@ -70,4 +75,18 @@ if(OS_MAC)
     if(USE_SANDBOX)
         target_link_libraries(${HELPER_TARGET} cef_sandbox_lib)
     endif()
+endif()
+
+if(OS_LINUX)
+    ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+
+    set(HELPER_TARGET "client-bevy_helper")
+    set(HELPER_OUTPUT_NAME "client-bevy Helper")
+
+    add_executable(${HELPER_TARGET} WIN32 ${HELPER_SRCS})
+    SET_EXECUTABLE_TARGET_PROPERTIES(${HELPER_TARGET})
+    target_link_libraries(${HELPER_TARGET} libcef_lib libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+
+    COPY_FILES("${HELPER_TARGET}" "${CEF_BINARY_FILES}" "${CEF_BINARY_DIR}" "${CEF_TARGET_OUT_DIR}")
+    COPY_FILES("${HELPER_TARGET}" "${CEF_RESOURCE_FILES}" "${CEF_RESOURCE_DIR}" "${CEF_TARGET_OUT_DIR}")
 endif()

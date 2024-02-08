@@ -1,0 +1,42 @@
+name: Linux
+
+on:
+  push:
+    branches: [master]
+    paths: ['.github/workflows/linux.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@v2
+
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: "3.24.0"
+
+      - name: Setup Ninja
+        run: |
+          sudo wget -qO /usr/local/bin/ninja.gz https://github.com/ninja-build/ninja/releases/latest/download/ninja-linux.zip
+          sudo gunzip /usr/local/bin/ninja.gz
+          sudo chmod a+x /usr/local/bin/ninja
+      
+      - name: Compile process
+        run: |
+          mkdir build
+          cd build
+          cmake -G "Ninja" -DPROJECT_ARCH=x86_64 ..
+          cmake --build . -v
+
+      - id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: v1.0.3-${{ steps.vars.outputs.sha_short }}-macosx86_64
+          path: |
+            ./build/src/Debug/client-bevy
+            ./libcef/Debug/Chromium Embedded Framework.framework
