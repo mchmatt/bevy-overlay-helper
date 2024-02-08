@@ -30,6 +30,14 @@ jobs:
           cmake -G "Ninja" -DPROJECT_ARCH=x86_64 ..
           cmake --build . -v
 
+      - name: Strip symbols
+        run: |
+          cd ./build/src/Release
+          strip libcef.so
+          strip libEGL.so
+          strip libGLESv2.so
+          strip libvk_swiftshader.so
+
       - id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         
